@@ -78,11 +78,11 @@ export default function FavoriteScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate("RecipeDetail", { ...item })}
-            style={styles.recipeCard}
+            style={styles.cardContainer}
           >
-            <Image source={{ uri: item.image }} style={styles.recipeImage} />
-            <Text style={styles.recipeName}>
-              {item.name > 20 ? item.name.slice(0, 20) + "…" : item.name}
+            <Image source={{ uri: item.recipeImage }} style={styles.recipeImage} />
+            <Text style={styles.recipeTitle}>
+              {item.recipeName > 20 ? item.recipeName.slice(0, 20) + "…" : item.recipeName}
             </Text>
           </TouchableOpacity>
         )}
