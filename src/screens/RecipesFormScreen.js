@@ -1,7 +1,7 @@
-import { View,Text,TextInput,TouchableOpacity,Image,StyleSheet,} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {widthPercentageToDP as wp,heightPercentageToDP as hp,} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp, } from "react-native-responsive-screen";
 
 export default function RecipesFormScreen({ route, navigation }) {
   const { recipeToEdit, recipeIndex, onrecipeEdited } = route.params || {};
@@ -12,7 +12,24 @@ export default function RecipesFormScreen({ route, navigation }) {
   );
 
   const saverecipe = async () => {
- 
+    const newRecipe = {
+      title,
+      image,
+      description,
+    };
+    const existingRecipes = JSON.parse(
+      (await AsyncStorage.getItem("recipes")) || "[]"
+    );
+    if (recipeToEdit) {
+      // Update existing recipe
+      existingRecipes[recipeIndex] = newRecipe;
+      if (onrecipeEdited) onrecipeEdited();
+    } else {
+      // Add new recipe
+      existingRecipes.push(newRecipe);
+    }
+    await AsyncStorage.setItem("recipes", JSON.stringify(existingRecipes));
+    navigation.goBack();
   };
 
   return (
@@ -63,7 +80,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height:200,
+    height: 200,
     margin: wp(2),
   },
   imagePlaceholder: {
