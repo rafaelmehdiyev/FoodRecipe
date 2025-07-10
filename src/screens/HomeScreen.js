@@ -8,8 +8,6 @@ import {
 } from "react-native-responsive-screen";
 import Categories from "../components/categories";
 import FoodItems from "../components/recipes";
-import { FlatList } from "react-native-web";
-import Recipe from "../components/recipes";
 
 export default function HomeScreen() {
   const [activeCategory, setActiveCategory] = useState("Chicken");
@@ -739,7 +737,7 @@ export default function HomeScreen() {
         </View>
 
         <View testID="foodList">
-          <Recipe categories={categories} foods={filteredfoods}/>
+          <FoodItems categories={categories} foods={filteredfoods}/>
         </View>
       </ScrollView>
     </View>

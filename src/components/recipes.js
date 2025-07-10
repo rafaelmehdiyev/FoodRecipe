@@ -30,12 +30,13 @@ const ArticleCard = ({ item, index, navigation }) => {
       style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15 }]} testID="articleDisplay"
     >
       <TouchableOpacity
-        onPress={() => navigation.navigate("RecipeDetails", { ...item })}>
+        onPress={() => navigation.navigate("RecipeDetail", { ...item })}
+      >
         <Image source={item.recipeImage} style={[styles.articleImage, { height: index % 3 === 0 ? hp(25) : hp(35) }]} />
         <Text style={styles.articleText}>{item.recipeName}</Text>
         <Text style={styles.articleDescription}>
           {item.cookingDescription > 50
-            ? item.cookingDescription.slice(0, 50) + "..." 
+            ? item.cookingDescription.slice(0, 50) + "..."
             : item.cookingDescription}
         </Text>
       </TouchableOpacity>
