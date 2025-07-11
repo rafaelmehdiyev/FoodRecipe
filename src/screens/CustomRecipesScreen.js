@@ -20,7 +20,7 @@ export default function CustomRecipesScreen() {
   const dispatch = useDispatch();
 
   const route = useRoute();
-  const { recipe } = route.params.recipe || {}; // Pass the  object as a parameter
+  const { recipe } = route.params || {}; // Pass the  object as a parameter
   console.log("recipe", recipe);
 
   const favoriteRecipe = useSelector(
@@ -28,7 +28,7 @@ export default function CustomRecipesScreen() {
   );
   console.log("favoriteRecipe from custom", favoriteRecipe);
 
-  const isFavourite = favoriteRecipe.includes(recipe.idCategory); // Adjust this according to your recipe structure
+  const isFavourite = favoriteRecipe.includes(recipe.idFood); // Adjust this according to your recipe structure
 
   if (!recipe) {
     return (
@@ -56,7 +56,7 @@ export default function CustomRecipesScreen() {
             source={{ uri: recipe.image }}
             style={[
               styles.recipeImage,
-              { height: index % 3 === 0 ? hp(25) : hp(35) },
+              { height: 1 % 3 === 0 ? hp(25) : hp(35) },
             ]}
           />
         )}

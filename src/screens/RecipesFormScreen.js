@@ -23,21 +23,36 @@ export default function RecipesFormScreen({ route, navigation }) {
 
   const saverecipe = async () => {
     const newRecipe = {
-      title,
-      image,
-      description,
+      recipeName: title,
+      recipeImage: image,
+      recipeInstructions: description,
     };
+
     const existingRecipes = JSON.parse(
       (await AsyncStorage.getItem("customrecipes")) || "[]"
     );
+
+    // Get or initialize ID
+    let lastId = parseInt(await AsyncStorage.getItem("lastCustomId")) || 0;
+
     if (recipeToEdit) {
-      // Update existing recipe
-      existingRecipes[recipeIndex] = newRecipe;
+      existingRecipes[recipeIndex] = {
+        ...newRecipe,
+        idFood: existingRecipes[recipeIndex].idFood, // Keep same ID
+        category: existingRecipes[recipeIndex].category, // Optional
+      };
       if (onrecipeEdited) onrecipeEdited();
     } else {
-      // Add new recipe
-      existingRecipes.push(newRecipe);
+      lastId++;
+      const recipeWithId = {
+        ...newRecipe,
+        idFood: `${lastId}`, // Or `custom_${lastId}`
+        category: "Custom", // Or allow user to choose
+      };
+      existingRecipes.push(recipeWithId);
+      await AsyncStorage.setItem("lastCustomId", lastId.toString());
     }
+
     await AsyncStorage.setItem(
       "customrecipes",
       JSON.stringify(existingRecipes)
