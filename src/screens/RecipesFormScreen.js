@@ -23,9 +23,9 @@ export default function RecipesFormScreen({ route, navigation }) {
 
   const saverecipe = async () => {
     const newRecipe = {
-      recipeName: title,
-      recipeImage: image,
-      recipeInstructions: description,
+      title,
+      image,
+      description,
     };
 
     const existingRecipes = JSON.parse(
@@ -46,8 +46,8 @@ export default function RecipesFormScreen({ route, navigation }) {
       lastId++;
       const recipeWithId = {
         ...newRecipe,
-        idFood: `${lastId}`, // Or `custom_${lastId}`
-        category: "Custom", // Or allow user to choose
+        idFood: `${lastId}`,
+        recipeCategory: "Custom",
       };
       existingRecipes.push(recipeWithId);
       await AsyncStorage.setItem("lastCustomId", lastId.toString());

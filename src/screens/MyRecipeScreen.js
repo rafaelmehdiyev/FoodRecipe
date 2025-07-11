@@ -95,14 +95,14 @@ export default function MyRecipeScreen() {
                   onPress={() => handlerecipeClick(recipe)}
                 >
                   <Image
-                    source={recipe.recipeImage}
+                    source={recipe.image}
                     style={styles.recipeImage}
                   />
                   <Text style={styles.recipeTitle}>{recipe.title}</Text>
                   <Text style={styles.recipeDescription} testID="recipeDescp">
-                    {recipe.recipeInstructions > 50
-                      ? recipe.recipeInstructions.slice(0, 50) + "..."
-                      : recipe.recipeInstructions}
+                    {recipe.description > 50
+                      ? recipe.description.slice(0, 50) + "..."
+                      : recipe.description}
                   </Text>
                 </TouchableOpacity>
 

@@ -80,9 +80,9 @@ export default function FavoriteScreen() {
             onPress={() => navigation.navigate("RecipeDetail", { ...item })}
             style={styles.cardContainer}
           >
-            <Image source={{ uri: item.recipeImage }} style={styles.recipeImage} />
+            <Image source={{ uri: item.recipeImage || item.image }} style={styles.recipeImage} />
             <Text style={styles.recipeTitle}>
-              {item.recipeName > 20 ? item.recipeName.slice(0, 20) + "…" : item.recipeName}
+              {item.recipeName || item.title > 20 ? item.recipeName.slice(0, 20) || item.title.slice(0,20) + "…" : item.recipeName || item.title}
             </Text>
           </TouchableOpacity>
         )}
